@@ -9,6 +9,8 @@ public interface LocationService {
     List<LocationDTO> getAllLocations();
     public LocationDTO searchById(Long id);
 
+    LocationDTO searchByName(String name);
+
     public LocationDTO saveLocation(LocationDTO locationDTO);
     public LocationDTO updateLocation(LocationDTO locationDTO, Long id);
 

@@ -1,17 +1,19 @@
 package com.challenge.challenge.dto;
 
 import lombok.*;
+import java.util.List;
 
 @Data
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CharacterDTO {
+public class EpisodeDTO {
     private Long id;
+
     private String name;
-    private String species;
-    private String gender;
-    private String image;
-    private LocationDTO location;
+
+    private String numberEpisode;
+
+    private List<EpisodeCharacterDTO> characters;
 }

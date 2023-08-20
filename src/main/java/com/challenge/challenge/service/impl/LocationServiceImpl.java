@@ -32,6 +32,10 @@ public class LocationServiceImpl implements LocationService {
         return mapDTO(locationRepository.findById(id).get());
     }
 
+    public LocationDTO searchByName(String name) {
+        return mapDTO(locationRepository.findByName(name));
+    }
+
     public LocationDTO saveLocation(LocationDTO locationDTO) {
         return mapDTO(locationRepository.save(mapEntity(locationDTO)));
     }
@@ -53,6 +57,9 @@ public class LocationServiceImpl implements LocationService {
     }
 
     private LocationDTO mapDTO(Location location) {
+        if (location == null) {
+            return null;
+        }
         return modelMapper.map(location, LocationDTO.class);
     }
 }

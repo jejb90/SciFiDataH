@@ -32,6 +32,10 @@ public class CharacterServiceImpl implements CharacterService {
         return mapDTO(characterRepository.findById(id).get());
     }
 
+    public CharacterDTO searchByName(String name){
+        return mapDTO(characterRepository.findByName(name));
+    }
+
     public CharacterDTO saveCharacter(CharacterDTO characterDTO) {
         return mapDTO(characterRepository.save(mapEntity(characterDTO)));
     }
@@ -53,6 +57,9 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     private CharacterDTO mapDTO(Character character) {
+        if(character == null){
+            return null;
+        }
         return modelMapper.map(character, CharacterDTO.class);
     }
 }

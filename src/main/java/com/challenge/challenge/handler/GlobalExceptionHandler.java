@@ -12,6 +12,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ResponseStatusException.class)
     @ResponseBody
     public ErrorResponse handleResponseStatusException(ResponseStatusException ex) {
-        return new ErrorResponse(ex.getReason() + ex.getMessage(), ex.getStatusCode().value());
+        return new ErrorResponse(ex.getReason(), ex.getStatusCode().value());
     }
 }

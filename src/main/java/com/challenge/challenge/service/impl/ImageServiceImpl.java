@@ -16,15 +16,16 @@ public class ImageServiceImpl implements ImageService {
     @Value("${upload-dir}")
     private String uploadDir;
 
-    @Override
     public String saveImage(MultipartFile file) {
         String originalFileName = file.getOriginalFilename();
         String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
         String newFileName = UUID.randomUUID().toString() + fileExtension;
-
-        Path filePath = Paths.get(uploadDir, newFileName);
-
         try {
+            Path uploadPath = Paths.get(uploadDir);
+            if (!Files.exists(uploadPath)) {
+                Files.createDirectories(uploadPath);
+            }
+            Path filePath = Paths.get(uploadDir, newFileName);
             Files.write(filePath, file.getBytes());
             return newFileName;
         } catch (IOException e) {

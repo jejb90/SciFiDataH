@@ -5,7 +5,6 @@ import com.challenge.challenge.service.CharacterService;
 import com.challenge.challenge.service.ImageService;
 import com.challenge.challenge.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,7 +17,6 @@ public class CharacterController {
 
     private final CharacterService characterService;
     private final ImageService imageService;
-
     private final LocationService locationService;
 
     @Autowired
@@ -37,6 +35,7 @@ public class CharacterController {
     public ResponseEntity<CharacterDTO> getCharacterById(@PathVariable(name = "id") Long id) {
         return ResponseEntity.ok(characterService.searchById(id));
     }
+
     @PostMapping(consumes = {"multipart/form-data", "application/octet-stream"})
     public ResponseEntity<CharacterDTO> saveCharacter(
             @RequestParam String name,
@@ -45,19 +44,15 @@ public class CharacterController {
             @RequestParam String locationId,
             @RequestParam MultipartFile file
     ) {
-        try{
-            CharacterDTO characterDTO = new CharacterDTO();
-            characterDTO.setName(name);
-            characterDTO.setSpecies(species);
-            characterDTO.setGender(gender);
-            characterDTO.setLocation(locationService.searchById(Long.parseLong(locationId)));
-            characterDTO.setImage(imageService.saveImage(file));
-
-            return ResponseEntity.ok(characterService.saveCharacter(characterDTO));
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        CharacterDTO characterDTO = new CharacterDTO();
+        characterDTO.setName(name);
+        characterDTO.setSpecies(species);
+        characterDTO.setGender(gender);
+        characterDTO.setLocation(locationService.searchById(Long.parseLong(locationId)));
+        characterDTO.setImage(imageService.saveImage(file));
+        return ResponseEntity.ok(characterService.saveCharacter(characterDTO));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<CharacterDTO> updateCharacter(@RequestBody CharacterDTO characterDTO, @PathVariable(name = "id") Long id) {
         return ResponseEntity.ok(characterService.updateCharacter(characterDTO, id));
@@ -65,7 +60,9 @@ public class CharacterController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable(name = "id") Long id) {
+        CharacterDTO characterDTO = characterService.searchById(id);
         characterService.deleteCharacter(id);
+        imageService.deleteImage(characterDTO.getImage());
         return ResponseEntity.ok("Character Delete");
     }
 }
