@@ -58,7 +58,7 @@ public class EpisodeServiceImpl implements EpisodeService {
             characters.add(characterDTO);
             episodeCharacterService.saveEpisodeCharacter(episodeDTOSave, characterDTO);
         }
-        return episodeDTO;
+        return episodeDTOSave;
     }
 
     public void deleteEpisode(Long id) {

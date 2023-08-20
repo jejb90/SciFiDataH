@@ -18,13 +18,15 @@ public class Character {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Nullable
+    @Column(name = "species", nullable = true)
     private String species;
-    @Nullable
+    @Column(name = "gender", nullable = true)
     private String gender;
 
+    @Column(name = "image", nullable = true)
     @Nullable
     private String image;
     @ManyToOne

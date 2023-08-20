@@ -2,12 +2,14 @@ package com.challenge.challenge.controller;
 
 import com.challenge.challenge.dto.LocationDTO;
 import com.challenge.challenge.service.LocationService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Transactional
 @RestController
 @RequestMapping("/api/location")
 public class LocationController {
