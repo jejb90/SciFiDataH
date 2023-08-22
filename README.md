@@ -1,5 +1,27 @@
 # SciFiDataH
 
+
+## Ejecución con Docker
+
+Si deseas ejecutar la aplicación utilizando Docker, tienes dos opciones:
+
+1. Utilizar la imagen de Docker directamente con el siguiente comando:
+
+   ```bash
+   docker run -d -p 8080:8080 jejb90/scifidatah:latest
+    
+2. Utilizar Docker Compose desde el proyecto con el siguiente comando:
+
+   ```bash
+   docker-compose up   
+
+Ambas opciones ejecutan la aplicación en el puerto 8080.
+
+## Acceso a la Aplicación en una Máquina Virtual
+Se ha montado la aplicación en una máquina virtual de Google Cloud con la siguiente dirección IP:
+
+http://34.75.219.118
+
 # Documentación de API con Swagger y Base de Datos H2
 
 En este proyecto de Spring Boot, hemos utilizado Swagger para documentar los endpoints de nuestra API, lo que facilita su exploración y comprensión.
@@ -9,6 +31,9 @@ En este proyecto de Spring Boot, hemos utilizado Swagger para documentar los end
 La documentación de los endpoints de la API se encuentra disponible a través de Swagger. Puedes acceder a la interfaz Swagger UI en la siguiente URL:
 
 [Swagger UI](http://localhost:8080/swagger-ui/index.html#)
+
+### Endpoints de la MV
+[Swagger UI](http://34.75.219.118/swagger-ui/index.html#)
 
 La interfaz Swagger UI proporciona una forma fácil de explorar y probar los diferentes endpoints de la API. Puedes ver los detalles de cada endpoint, sus parámetros, solicitudes y respuestas.
 
